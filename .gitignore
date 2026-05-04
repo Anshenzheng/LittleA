@@ -13,50 +13,50 @@ Thumbs.db
 # 2. 后端配置 (Java/Maven/Spring Boot)
 # ==========================================
 # 编译后的类文件
-server/**/*.class
-server/**/target/
-server/**/bin/
+backend/**/*.class
+backend/**/target/
+backend/**/bin/
 
 # 日志文件
-server/**/logs/
-server/**/*.log
+backend/**/logs/
+backend/**/*.log
 
 # Maven 属性文件
-server/.mvn/wrapper/maven-wrapper.jar
-server/release.properties
-server/pom.xml.tag
-server/pom.xml.releaseBackup
-server/pom.xml.backup
-server/pom.xml.versionsBackup
+backend/.mvn/wrapper/maven-wrapper.jar
+backend/release.properties
+backend/pom.xml.tag
+backend/pom.xml.releaseBackup
+backend/pom.xml.backup
+backend/pom.xml.versionsBackup
 
 # Gradle 缓存
-server/.gradle/
-server/build/
+backend/.gradle/
+backend/build/
 
 # ==========================================
 # 3. 前端配置 (Node/Angular)
 # ==========================================
 # 依赖
-client/node_modules/
-client/dist/
-client/.angular/
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
 
 # 日志与缓存
-client/*.log
-client/npm-debug.log*
-client/yarn-debug.log*
-client/yarn-error.log*
-client/.eslintcache
-client/.cache/
+frontend/*.log
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/.eslintcache
+frontend/.cache/
 
 # 单元测试与覆盖率
-client/coverage/
-client/.nyc_output/
+frontend/coverage/
+frontend/.nyc_output/
 
 # 环境变量 (包含敏感信息)
-client/.env
-client/.env.*
-!client/.env.example
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
 
 # ==========================================
 # 4. 其他 (构建产物)
