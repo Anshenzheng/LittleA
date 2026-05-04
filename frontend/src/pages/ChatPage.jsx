@@ -104,70 +104,70 @@ function ChatPage() {
   };
 
   return (
-    <Card
-      style={{ height: '100%', borderRadius: 8 }}
-      bodyStyle={{ padding: 0, height: '100%' }}
-    >
-      <div className="chat-container" ref={chatContainerRef}>
-        {messages.length === 0 && (
-          <div style={{
-            textAlign: 'center',
-            padding: '60px 20px',
-            color: '#999',
-          }}>
-            <RobotOutlined style={{ fontSize: 64, color: '#1890ff', marginBottom: 16 }} />
-            <h3 style={{ color: '#333', marginBottom: 8 }}>欢迎使用个人智能助理</h3>
-            <p>我可以帮助您：</p>
-            <ul style={{ textAlign: 'left', maxWidth: 400, margin: '16px auto' }}>
-              <li>回答各种问题，提供信息咨询</li>
-              <li>自动搜索网络并整理成专业报告</li>
-              <li>设置定时任务，定期推送感兴趣的资讯</li>
-              <li>支持 Markdown 格式的富文本显示</li>
-            </ul>
-          </div>
-        )}
-        {messages.map(renderMessage)}
-        {loading && (
-          <div className="chat-message assistant">
-            <div className="avatar">
-              <RobotOutlined />
+    <div className="chat-page-wrapper">
+      <Card
+        className="chat-card"
+        bodyStyle={{ padding: 0, height: '100%', display: 'flex', flexDirection: 'column' }}
+      >
+        <div className="chat-messages-container" ref={chatContainerRef}>
+          {messages.length === 0 && (
+            <div className="chat-welcome">
+              <RobotOutlined className="welcome-icon" />
+              <h3 className="welcome-title">欢迎使用个人智能助理</h3>
+              <p className="welcome-subtitle">我可以帮助您：</p>
+              <ul className="welcome-features">
+                <li>回答各种问题，提供信息咨询</li>
+                <li>自动搜索网络并整理成专业报告</li>
+                <li>设置定时任务，定期推送感兴趣的资讯</li>
+                <li>支持 Markdown 格式的富文本显示</li>
+              </ul>
             </div>
-            <div className="content">
-              <Spin size="small" />
-              <span style={{ marginLeft: 8 }}>思考中...</span>
+          )}
+          {messages.map(renderMessage)}
+          {loading && (
+            <div className="chat-message assistant">
+              <div className="avatar">
+                <RobotOutlined />
+              </div>
+              <div className="content">
+                <Spin size="small" />
+                <span style={{ marginLeft: 8 }}>思考中...</span>
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="chat-input-wrapper">
+          <div className="chat-input-container">
+            <div style={{ display: 'flex', gap: 12 }}>
+              <TextArea
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder="输入您的问题... (Enter 发送，Shift+Enter 换行)"
+                autoSize={{ minRows: 1, maxRows: 4 }}
+                style={{ flex: 1, resize: 'none' }}
+                disabled={loading}
+              />
+              <Button
+                type="primary"
+                icon={<SendOutlined />}
+                onClick={handleSend}
+                loading={loading}
+                size="large"
+              >
+                发送
+              </Button>
+            </div>
+            <div style={{ marginTop: 12, fontSize: 12, color: '#999', display: 'flex', gap: 20, alignItems: 'center' }}>
+              <Button type="text" size="small" icon={<SearchOutlined />} disabled>
+                搜索网络
+              </Button>
+              <span>💡 提示：支持 Markdown 格式显示</span>
             </div>
           </div>
-        )}
-      </div>
-      <div className="chat-input-container">
-        <div style={{ display: 'flex', gap: 8 }}>
-          <TextArea
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            onKeyPress={handleKeyPress}
-            placeholder="输入您的问题... (Enter 发送，Shift+Enter 换行)"
-            autoSize={{ minRows: 1, maxRows: 4 }}
-            style={{ flex: 1, resize: 'none' }}
-            disabled={loading}
-          />
-          <Button
-            type="primary"
-            icon={<SendOutlined />}
-            onClick={handleSend}
-            loading={loading}
-            size="large"
-          >
-            发送
-          </Button>
         </div>
-        <div style={{ marginTop: 8, fontSize: 12, color: '#999', display: 'flex', gap: 16 }}>
-          <Button type="text" size="small" icon={<SearchOutlined />}>
-            搜索网络
-          </Button>
-          <span>提示：支持 Markdown 格式显示</span>
-        </div>
-      </div>
-    </Card>
+      </Card>
+    </div>
   );
 }
 
