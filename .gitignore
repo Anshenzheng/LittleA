@@ -13,50 +13,50 @@ Thumbs.db
 # 2. 后端配置 (Java/Maven/Spring Boot)
 # ==========================================
 # 编译后的类文件
-backend/**/*.class
-backend/**/target/
-backend/**/bin/
+server/**/*.class
+server/**/target/
+server/**/bin/
 
 # 日志文件
-backend/**/logs/
-backend/**/*.log
+server/**/logs/
+server/**/*.log
 
 # Maven 属性文件
-backend/.mvn/wrapper/maven-wrapper.jar
-backend/release.properties
-backend/pom.xml.tag
-backend/pom.xml.releaseBackup
-backend/pom.xml.backup
-backend/pom.xml.versionsBackup
+server/.mvn/wrapper/maven-wrapper.jar
+server/release.properties
+server/pom.xml.tag
+server/pom.xml.releaseBackup
+server/pom.xml.backup
+server/pom.xml.versionsBackup
 
 # Gradle 缓存
-backend/.gradle/
-backend/build/
+server/.gradle/
+server/build/
 
 # ==========================================
 # 3. 前端配置 (Node/Angular)
 # ==========================================
 # 依赖
-frontend/node_modules/
-frontend/dist/
-frontend/.angular/
+client/node_modules/
+client/dist/
+client/.angular/
 
 # 日志与缓存
-frontend/*.log
-frontend/npm-debug.log*
-frontend/yarn-debug.log*
-frontend/yarn-error.log*
-frontend/.eslintcache
-frontend/.cache/
+client/*.log
+client/npm-debug.log*
+client/yarn-debug.log*
+client/yarn-error.log*
+client/.eslintcache
+client/.cache/
 
 # 单元测试与覆盖率
-frontend/coverage/
-frontend/.nyc_output/
+client/coverage/
+client/.nyc_output/
 
 # 环境变量 (包含敏感信息)
-frontend/.env
-frontend/.env.*
-!frontend/.env.example
+client/.env
+client/.env.*
+!client/.env.example
 
 # ==========================================
 # 4. 其他 (构建产物)
@@ -66,3 +66,68 @@ frontend/.env.*
 *.war
 *.zip
 *.tar.gz
+# Python 编译缓存
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# 分发 / 打包
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# 虚拟环境
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+.env/
+
+# IDE / 编辑器
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# 项目配置 / 密钥
+.env
+.env.local
+.env.*.local
+config.ini
+settings.ini
+secrets.json
+
+# 日志 / 数据库
+*.log
+*.sqlite
+*.sqlite3
+*.db
+
+# 测试 / 覆盖率
+htmlcov/
+.coverage
+.coverage.*
+.pytest_cache/
+nosetests.xml
+coverage.xml
+
+# 操作系统垃圾
+.DS_Store
+Thumbs.db
