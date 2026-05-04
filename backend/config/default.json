@@ -1,7 +1,7 @@
 {
   "model": {
     "provider": "deepseek",
-    "api_key": "",
+    "api_key": "sk-f9a7aff7fb564cd08cf599f6d185d255",
     "base_url": "https://api.deepseek.com/v1",
     "model": "deepseek-chat",
     "temperature": 0.7,
@@ -12,5 +12,45 @@
     "max_results": 10,
     "safe_search": true
   },
-  "tasks": []
+  "tasks": [
+    {
+      "name": "每日AI新闻搜集",
+      "query": "AI 新闻 最新",
+      "time": "08:57",
+      "schedule_type": "daily",
+      "weekday": "monday",
+      "description": "",
+      "id": "2b8627c1-509f-44a1-a117-b4f87f738b06",
+      "status": "active",
+      "created_at": "2026-05-04T08:56:02.614034",
+      "updated_at": "2026-05-04T08:56:18.755196",
+      "last_result": {
+        "task_id": "2b8627c1-509f-44a1-a117-b4f87f738b06",
+        "query": "AI 新闻 最新",
+        "results": [
+          {
+            "title": "关于 \"AI 新闻 最新\" 的最新资讯",
+            "snippet": "这是关于 AI 新闻 最新 的综合信息。在当前日期 2026-05-04，该话题受到广泛关注。建议您访问相关专业网站获取更详细信息。",
+            "link": "https://www.google.com/search?q=AI+新闻+最新",
+            "source": "综合资讯"
+          },
+          {
+            "title": "\"AI 新闻 最新\" 相关技术文章",
+            "snippet": "探索 AI 新闻 最新 的最新技术进展和应用案例。本文汇总了该领域的重要发展趋势和专家观点，帮助您快速了解行业动态。",
+            "link": "https://www.techmeme.com/search?q=AI+新闻+最新",
+            "source": "技术资讯"
+          },
+          {
+            "title": "AI 新闻 最新 - 维基百科",
+            "snippet": "AI 新闻 最新 是一个重要的话题。以下是相关背景信息和关键点概述：定义、历史背景、主要应用领域、未来发展趋势等。",
+            "link": "https://zh.wikipedia.org/wiki/AI 新闻 最新",
+            "source": "维基百科"
+          }
+        ],
+        "summary": "请求错误: 401 Client Error: Authorization Required for url: https://api.deepseek.com/v1/chat/completions",
+        "timestamp": "2026-05-04T08:57:03.377609",
+        "status": "success"
+      }
+    }
+  ]
 }

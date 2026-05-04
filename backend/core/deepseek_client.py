@@ -5,12 +5,16 @@ from .config_manager import config_manager
 
 class DeepSeekClient:
     def __init__(self):
-        self.config = config_manager.get_model_config()
+        pass
+
+    def _get_config(self) -> Dict[str, Any]:
+        return config_manager.get_model_config()
 
     def _get_headers(self) -> Dict[str, str]:
+        config = self._get_config()
         return {
             "Content-Type": "application/json",
-            "Authorization": f"Bearer {self.config.get('api_key', '')}"
+            "Authorization": f"Bearer {config.get('api_key', '')}"
         }
 
     def chat(
@@ -19,13 +23,14 @@ class DeepSeekClient:
         temperature: Optional[float] = None,
         max_tokens: Optional[int] = None
     ) -> str:
-        url = f"{self.config.get('base_url', 'https://api.deepseek.com/v1')}/chat/completions"
+        config = self._get_config()
+        url = f"{config.get('base_url', 'https://api.deepseek.com/v1')}/chat/completions"
         
         payload = {
-            "model": self.config.get('model', 'deepseek-chat'),
+            "model": config.get('model', 'deepseek-chat'),
             "messages": messages,
-            "temperature": temperature if temperature is not None else self.config.get('temperature', 0.7),
-            "max_tokens": max_tokens if max_tokens is not None else self.config.get('max_tokens', 2048)
+            "temperature": temperature if temperature is not None else config.get('temperature', 0.7),
+            "max_tokens": max_tokens if max_tokens is not None else config.get('max_tokens', 2048)
         }
 
         try:

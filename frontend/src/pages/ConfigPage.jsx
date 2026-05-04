@@ -11,6 +11,7 @@ import {
   Divider,
   Space,
   Alert,
+  Tag,
 } from 'antd';
 import { SaveOutlined, ReloadOutlined, EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
 import { configAPI } from '../services/api';
@@ -24,6 +25,8 @@ function ConfigPage() {
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [showApiKey, setShowApiKey] = useState(false);
+  const [apiKeyConfigured, setApiKeyConfigured] = useState(false);
+  const [apiKeyValue, setApiKeyValue] = useState('');
 
   const fetchConfigs = async () => {
     setLoading(true);
@@ -31,7 +34,18 @@ function ConfigPage() {
       const response = await configAPI.getAll();
       if (response.success) {
         const { model, search } = response.data;
-        modelForm.setFieldsValue(model);
+        
+        const configured = model.api_key_configured || false;
+        setApiKeyConfigured(configured);
+        
+        const modelData = { ...model };
+        delete modelData.api_key_configured;
+        
+        if (configured) {
+          setApiKeyValue('');
+        }
+        
+        modelForm.setFieldsValue(modelData);
         searchForm.setFieldsValue(search);
       }
     } catch (error) {
@@ -51,9 +65,23 @@ function ConfigPage() {
       const values = await modelForm.validateFields();
       setSaving(true);
 
-      const response = await configAPI.updateModelConfig(values);
+      const updates = { ...values };
+      
+      if (updates.api_key === undefined || updates.api_key === null || updates.api_key === '') {
+        delete updates.api_key;
+      }
+
+      const response = await configAPI.updateModelConfig(updates);
       if (response.success) {
         message.success('模型配置保存成功');
+        
+        if (response.data && response.data.api_key_configured !== undefined) {
+          setApiKeyConfigured(response.data.api_key_configured);
+          if (response.data.api_key_configured) {
+            setApiKeyValue('');
+            modelForm.setFieldsValue({ api_key: undefined });
+          }
+        }
       } else {
         message.error(response.message || '保存失败');
       }
@@ -116,12 +144,26 @@ function ConfigPage() {
 
           <Form.Item
             name="api_key"
-            label="API Key"
-            rules={[{ required: true, message: '请输入 API Key' }]}
-            extra="请访问 https://platform.deepseek.com/ 获取 API Key"
+            label={
+              <Space>
+                API Key
+                {apiKeyConfigured ? (
+                  <Tag color="green">已配置</Tag>
+                ) : (
+                  <Tag color="orange">未配置</Tag>
+                )}
+              </Space>
+            }
+            extra={
+              <span>
+                {apiKeyConfigured 
+                  ? 'API Key 已保存。如需修改，请输入新的 API Key。' 
+                  : '请访问 https://platform.deepseek.com/ 获取 API Key'}
+              </span>
+            }
           >
             <Input.Search
-              placeholder="请输入 API Key"
+              placeholder={apiKeyConfigured ? '留空则保持当前配置，或输入新值修改' : '请输入 API Key'}
               type={showApiKey ? 'text' : 'password'}
               enterButton={
                 <Button onClick={() => setShowApiKey(!showApiKey)}>
